@@ -1,9 +1,8 @@
-async function imageCall () {
-  const response = await fetch(`https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature`)
-  const data = await response.json()
-  const body = document.querySelector('body')
-  body.style.backgroundImage = `url('${data.urls.full}')`
-  // console.log(data.urls.full)
-}
+fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
+    .then(res => res.json())
+    .then(data => {
+        document.body.style.backgroundImage = `url(${data.urls.regular})`
+		    document.getElementById("credit").textContent = `Photo by: ${data.user.name}`
+    })
 
-imageCall()
+    
