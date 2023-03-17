@@ -27,11 +27,17 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
         `
     })
     .catch(err => console.error(err))
+        
 
-    const date = new Date()
-    const time = date.toLocaleTimeString("en-us", {timeStyle: "short"})
-    document.getElementById('time').textContent =`${time}`
-    // console.log(date.toLocaleTimeString("en-us", {timeStyle: "short"}))
+    function getCurrentTime () {
+        const date = new Date()
+        const time = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+        document.getElementById('time').textContent =`${time}`
+    }
+
+    setInterval(getCurrentTime, 1000) // updates the time every second
+
+ 
 
 
     
