@@ -37,6 +37,13 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 
     setInterval(getCurrentTime, 1000) // updates the time every second
 
+
+
+    navigator.geolocation.getCurrentPosition(position => {
+    console.log(position)
+});
+
+
  
 
 
