@@ -40,15 +40,21 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 
     navigator.geolocation.getCurrentPosition(position => {
         fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
-            .then (response => {
+            .then(response => {
                 if (!response.ok) {
                     throw Error ("Weather data not available")
                 }
                 return response.json()
             })
-            .then (data => {
-                document.getElementById("weather").innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/>`
-                // console.log(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+            .then(data => {
+                const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+                document.getElementById("weather").innerHTML = `
+                    <img src=${iconUrl} />
+                    <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+                    <p class="weather-city">${data.name}</p>
+                `
+               
+              
             })
             .catch(err => console.error(err))
     });
