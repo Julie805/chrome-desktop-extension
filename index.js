@@ -34,14 +34,26 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
         const time = date.toLocaleTimeString("en-us", {timeStyle: "short"})
         document.getElementById('time').textContent =`${time}`
     }
-
     setInterval(getCurrentTime, 1000) // updates the time every second
 
 
 
     navigator.geolocation.getCurrentPosition(position => {
-    console.log(position)
-});
+        fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
+            .then (response => {
+                if (!response.ok) {
+                    throw Error ("Weather data not available")
+                }
+                return response.json()
+            })
+            .then (data => {
+                document.getElementById("weather").innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/>`
+                // console.log(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+            })
+            .catch(err => console.error(err))
+    });
+
+    
 
 
  
